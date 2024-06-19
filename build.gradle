@@ -19,11 +19,25 @@ subprojects {
     }
 
     dependencies {
+        annotationProcessor "org.projectlombok:lombok:$lombokVersion"
+        compileOnly "org.projectlombok:lombok:$lombokVersion"
+
+        implementation "org.hibernate.validator:hibernate-validator:$hibernateValidatorVersion"
+        implementation "org.glassfish.expressly:expressly:$expresslyVersion"
+
+        implementation "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
+        implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion"
+
         implementation "org.springframework:spring-context:$springVersion"
+        implementation "org.springframework:spring-aop:$springVersion"
+        implementation "org.aspectj:aspectjrt:$aspectjVersion"
+        implementation "org.aspectj:aspectjweaver:$aspectjVersion"
 
         testImplementation "org.springframework:spring-test:$springVersion"
-        testImplementation "org.junit.jupiter:junit-jupiter-api:$jupiterVersion"
-        testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$jupiterVersion"
+        testImplementation "org.junit.jupiter:junit-jupiter:$jupiterVersion"
+        testImplementation "org.assertj:assertj-core:$assertjVersion"
+        testImplementation "org.mockito:mockito-core:$mockitoVersion"
+        testImplementation "org.mockito:mockito-junit-jupiter:$mockitoVersion"
         testImplementation "com.tngtech.archunit:archunit:$archUnitVersion"
 
         annotationProcessor "org.mapstruct:mapstruct-processor:$mapstructVersion"

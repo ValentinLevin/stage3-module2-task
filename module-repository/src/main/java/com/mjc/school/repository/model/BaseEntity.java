@@ -5,4 +5,6 @@ public interface BaseEntity<K> {
     K getId();
 
     void setId(K id);
+
+    BaseEntity<K> copy();
 }
