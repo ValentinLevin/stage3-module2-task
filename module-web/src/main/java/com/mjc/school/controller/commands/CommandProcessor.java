@@ -15,6 +15,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.EnumMap;
 import java.util.Map;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 @Component
 public class CommandProcessor {
@@ -72,7 +74,6 @@ public class CommandProcessor {
         Object bean = applicationContext.getBean(method.getDeclaringClass());
 
         R result = (R) method.invoke(bean, command.getArgs());
-
         command.setResult(result);
     }
 }

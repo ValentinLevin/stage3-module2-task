@@ -7,10 +7,7 @@ import com.mjc.school.controller.commands.annotations.CommandParam;
 import com.mjc.school.controller.commands.constant.ACTIONS;
 import com.mjc.school.controller.commands.constant.ENTITIES;
 import com.mjc.school.controller.commands.constant.RESULT_CODE;
-import com.mjc.school.controller.exception.AuthorNotFoundWebRuntimeException;
-import com.mjc.school.controller.exception.CustomWebRuntimeException;
-import com.mjc.school.controller.exception.IllegalAuthorIdValueWebException;
-import com.mjc.school.controller.exception.IllegalDataFormatWebException;
+import com.mjc.school.controller.exception.*;
 import com.mjc.school.service.AuthorService;
 import com.mjc.school.service.dto.AuthorDTO;
 import com.mjc.school.service.dto.AuthorRequestDTO;
@@ -51,7 +48,7 @@ public class AuthorController implements BaseController<AuthorRequestDTO, Author
         try {
             return authorService.create(createRequest);
         } catch (DTOValidationServiceException e) {
-            throw new IllegalDataFormatWebException(RESULT_CODE.ILLEGAL_DATA_FORMAT, createRequest.toString());
+            throw new RequestValidationWebException(RESULT_CODE.DATA_VALIDATION, e.getMessage());
         } catch (RequestNullReferenceException e) {
             throw new IllegalDataFormatWebException(RESULT_CODE.ILLEGAL_DATA_FORMAT, null);
         } catch (NullAuthorIdServiceException | AuthorNotFoundServiceException e) {
@@ -65,7 +62,7 @@ public class AuthorController implements BaseController<AuthorRequestDTO, Author
         try {
             return authorService.update(updateRequest);
         } catch (DTOValidationServiceException e) {
-            throw new IllegalDataFormatWebException(RESULT_CODE.ILLEGAL_DATA_FORMAT, updateRequest.toString());
+            throw new RequestValidationWebException(RESULT_CODE.DATA_VALIDATION, e.getMessage());
         } catch (RequestNullReferenceException e) {
             throw new IllegalDataFormatWebException(RESULT_CODE.ILLEGAL_DATA_FORMAT, null);
         } catch (NullAuthorIdServiceException | AuthorNotFoundServiceException e) {

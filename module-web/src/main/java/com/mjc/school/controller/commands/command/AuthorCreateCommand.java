@@ -4,17 +4,25 @@ import com.mjc.school.controller.commands.constant.ACTIONS;
 import com.mjc.school.controller.commands.constant.ENTITIES;
 import com.mjc.school.service.dto.AuthorDTO;
 import com.mjc.school.service.dto.AuthorRequestDTO;
+import lombok.Builder;
 
+@Builder()
 public class AuthorCreateCommand extends Command<AuthorDTO>{
-    private final AuthorRequestDTO authorRequestDTO;
+    private String authorName;
+    private final AuthorRequestDTO authorRequestDTO = new AuthorRequestDTO();
 
-    public AuthorCreateCommand(AuthorRequestDTO authorRequestDTO) {
+    public AuthorCreateCommand(String authorName) {
         super(ENTITIES.AUTHOR, ACTIONS.CREATE);
-        this.authorRequestDTO = authorRequestDTO;
+        this.authorRequestDTO.setName(authorName);
     }
 
     @Override
     public Object[] getArgs() {
         return new Object[]{this.authorRequestDTO};
+    }
+
+    @Override
+    public void printResult() {
+        System.out.println(getResult());
     }
 }

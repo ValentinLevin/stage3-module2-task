@@ -49,7 +49,9 @@ public class NewsController implements BaseController<NewsRequestDTO, NewsDTO, L
     public NewsDTO create(@CommandBody NewsRequestDTO createRequest) {
         try {
             return newsService.create(createRequest);
-        } catch (DTOValidationServiceException | NullAuthorIdServiceException e) {
+        } catch (DTOValidationServiceException e) {
+            throw new RequestValidationWebException(RESULT_CODE.DATA_VALIDATION, e.getMessage());
+        } catch (NullAuthorIdServiceException e) {
             throw new IllegalDataFormatWebException(RESULT_CODE.ILLEGAL_DATA_FORMAT, createRequest.toString());
         } catch (AuthorNotFoundServiceException e) {
             throw new AuthorNotFoundWebRuntimeException(RESULT_CODE.AUTHOR_NOT_FOUND, createRequest.getAuthorId());
@@ -65,7 +67,9 @@ public class NewsController implements BaseController<NewsRequestDTO, NewsDTO, L
     public NewsDTO update(@CommandBody NewsRequestDTO updateRequest) {
         try {
             return newsService.update(updateRequest);
-        } catch (DTOValidationServiceException | NullAuthorIdServiceException e) {
+        } catch (DTOValidationServiceException e) {
+            throw new RequestValidationWebException(RESULT_CODE.DATA_VALIDATION, e.getMessage());
+        } catch (NullAuthorIdServiceException e) {
             throw new IllegalDataFormatWebException(RESULT_CODE.ILLEGAL_DATA_FORMAT, updateRequest.toString());
         } catch (AuthorNotFoundServiceException e) {
             throw new AuthorNotFoundWebRuntimeException(RESULT_CODE.AUTHOR_NOT_FOUND, updateRequest.getAuthorId());

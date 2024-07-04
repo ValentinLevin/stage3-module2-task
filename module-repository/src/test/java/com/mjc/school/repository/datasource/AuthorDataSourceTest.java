@@ -74,6 +74,7 @@ class AuthorDataSourceTest {
 
         assertThat(newAuthorEntityDataReceivedFromDataSource)
                 .isPresent()
+                .get()
                 .usingRecursiveComparison()
                 .isEqualTo(addedAuthorEntity);
 

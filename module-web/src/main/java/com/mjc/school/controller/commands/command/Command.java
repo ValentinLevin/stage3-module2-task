@@ -15,6 +15,8 @@ public abstract class Command<R> {
 
     public abstract Object[] getArgs();
 
+    public abstract void printResult();
+
     Command(ENTITIES entity, ACTIONS action) {
         this.entity = entity;
         this.action = action;

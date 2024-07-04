@@ -15,4 +15,9 @@ public class NewsReadAllCommand extends Command<List<NewsDTO>>{
     public Object[] getArgs() {
         return new Object[0];
     }
+
+    @Override
+    public void printResult() {
+        getResult().forEach(System.out::println);
+    }
 }
