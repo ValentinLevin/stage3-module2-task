@@ -2,7 +2,6 @@ package com.mjc.school.repository.datasource;
 
 import com.mjc.school.repository.exception.EntityNotFoundException;
 import com.mjc.school.repository.exception.EntityNullReferenceException;
-import com.mjc.school.repository.exception.EntityValidationException;
 import com.mjc.school.repository.exception.KeyNullReferenceException;
 import com.mjc.school.repository.model.BaseEntity;
 

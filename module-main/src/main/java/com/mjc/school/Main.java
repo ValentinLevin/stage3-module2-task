@@ -31,6 +31,10 @@ public class Main {
           case "5" -> helper.deleteAuthor(keyboard);
 
           case "6" -> helper.getNews();
+          case "7" -> helper.getNewsById(keyboard);
+          case "8" -> helper.createNews(keyboard);
+          case "9" -> helper.updateNews(keyboard);
+          case "10" -> helper.deleteNews(keyboard);
 
           case "0" -> System.exit(0);
           default -> System.out.println(COMMAND_NOT_FOUND);

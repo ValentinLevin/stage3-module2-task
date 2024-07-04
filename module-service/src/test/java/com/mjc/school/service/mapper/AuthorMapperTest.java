@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class AuthorMapperTest {
-    private AuthorMapper authorMapper = new AuthorMapperImpl();
+    private final AuthorMapper authorMapper = new AuthorMapperImpl();
 
     @Test
     @DisplayName("Testing how AuthorEntity maps to AuthorDTO")

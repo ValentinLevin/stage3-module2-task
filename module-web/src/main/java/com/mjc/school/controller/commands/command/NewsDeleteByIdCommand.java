@@ -2,13 +2,12 @@ package com.mjc.school.controller.commands.command;
 
 import com.mjc.school.controller.commands.constant.ACTIONS;
 import com.mjc.school.controller.commands.constant.ENTITIES;
-import com.mjc.school.service.dto.AuthorDTO;
 
-public class AuthorReadByIdCommand extends Command<AuthorDTO>{
+public class NewsDeleteByIdCommand extends Command<Boolean>{
     private final Long id;
 
-    public AuthorReadByIdCommand(Long id) {
-        super(ENTITIES.AUTHOR, ACTIONS.READ_BY_ID);
+    public NewsDeleteByIdCommand(Long id) {
+        super(ENTITIES.NEWS, ACTIONS.DELETE_BY_ID);
         this.id = id;
     }
 

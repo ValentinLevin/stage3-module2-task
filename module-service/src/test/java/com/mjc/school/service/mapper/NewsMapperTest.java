@@ -12,7 +12,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class NewsMapperTest {
     private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
-    private NewsMapper newsMapper = new NewsMapperImpl();
+    private final NewsMapper newsMapper = new NewsMapperImpl();
 
     @Test
     @DisplayName("Testing how NewsEntity maps to NewsDTO")

@@ -1,20 +1,22 @@
 package com.mjc.school.controller.commands.command;
 
+import com.mjc.school.controller.commands.constant.ACTIONS;
+import com.mjc.school.controller.commands.constant.ENTITIES;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 public abstract class Command<R> {
-    private final String entity;
-    private final String commandName;
+    private final ENTITIES entity;
+    private final ACTIONS action;
 
     private R result;
 
     public abstract Object[] getArgs();
 
-    Command(String entity, String commandName) {
+    Command(ENTITIES entity, ACTIONS action) {
         this.entity = entity;
-        this.commandName = commandName;
+        this.action = action;
     }
 }

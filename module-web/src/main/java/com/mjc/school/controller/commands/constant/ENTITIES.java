@@ -1,6 +1,15 @@
 package com.mjc.school.controller.commands.constant;
 
-public interface ENTITIES {
-    String AUTHOR ="author";
-    String NEWS = "news";
+import lombok.Getter;
+
+@Getter
+public enum ENTITIES {
+    AUTHOR("author"),
+    NEWS("news");
+
+    private final String name;
+
+    ENTITIES(String name) {
+        this.name = name;
+    }
 }

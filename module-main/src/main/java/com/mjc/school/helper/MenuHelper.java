@@ -5,6 +5,7 @@ import com.mjc.school.controller.commands.command.*;
 import com.mjc.school.service.dto.AuthorDTO;
 import com.mjc.school.service.dto.AuthorRequestDTO;
 import com.mjc.school.service.dto.NewsDTO;
+import com.mjc.school.service.dto.NewsRequestDTO;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
@@ -102,6 +103,79 @@ public class MenuHelper {
     Command<List<NewsDTO>> command = new NewsReadAllCommand();
     commandProcessor.processCommand(command);
     command.getResult().forEach(System.out::println);
+  }
+
+  public void getNewsById(Scanner keyboard) throws InvocationTargetException, IllegalAccessException {
+    System.out.println(GET_NEWS_BY_ID.getOperation());
+    System.out.println(NEWS_ID_ENTER);
+
+    long id = getKeyboardNumber(NEWS_ID, keyboard);
+
+    Command<NewsDTO> command = new NewsReadByIdCommand(id);
+    commandProcessor.processCommand(command);
+    System.out.println(command.getResult());
+  }
+
+  public void createNews(Scanner keyboard) throws InvocationTargetException, IllegalAccessException {
+    NewsRequestDTO dtoRequest = null;
+    boolean isValid = false;
+    while (!isValid) {
+      try {
+        System.out.println(CREATE_NEWS.getOperation());
+
+        System.out.println(NEWS_TITLE_ENTER);
+        String title = keyboard.nextLine();
+        System.out.println(NEWS_CONTENT_ENTER);
+        String content = keyboard.nextLine();
+        System.out.println(AUTHOR_ID_ENTER);
+        Long authorId = getKeyboardNumber(AUTHOR_ID, keyboard);
+
+        dtoRequest = new NewsRequestDTO(null, title, content, authorId);
+        isValid = true;
+      } catch (Exception ex) {
+        System.out.println(ex.getMessage());
+      }
+    }
+    NewsCreateCommand command = new NewsCreateCommand(dtoRequest);
+    commandProcessor.processCommand(command);
+    System.out.println(command.getResult());
+  }
+
+  public void updateNews(Scanner keyboard) throws InvocationTargetException, IllegalAccessException {
+    NewsRequestDTO dtoRequest = null;
+    boolean isValid = false;
+    while (!isValid) {
+      try {
+        System.out.println(UPDATE_NEWS.getOperation());
+        System.out.println(NEWS_ID_ENTER);
+        Long newsId = getKeyboardNumber(NEWS_ID, keyboard);
+        System.out.println(NEWS_TITLE_ENTER);
+        String title = keyboard.nextLine();
+        System.out.println(NEWS_CONTENT_ENTER);
+        String content = keyboard.nextLine();
+        System.out.println(AUTHOR_ID_ENTER);
+        Long authorId = getKeyboardNumber(AUTHOR_ID, keyboard);
+
+        dtoRequest = new NewsRequestDTO(newsId, title, content, authorId);
+        isValid = true;
+      } catch (Exception ex) {
+        System.out.println(ex.getMessage());
+      }
+    }
+
+    NewsUpdateCommand command = new NewsUpdateCommand(dtoRequest);
+    commandProcessor.processCommand(command);
+    System.out.println(command.getResult());
+  }
+
+  public void deleteNews(Scanner keyboard) throws InvocationTargetException, IllegalAccessException {
+    System.out.println(REMOVE_NEWS_BY_ID.getOperation());
+    System.out.println(NEWS_ID_ENTER);
+    Long id = getKeyboardNumber(NEWS_ID, keyboard);
+
+    NewsDeleteByIdCommand command = new NewsDeleteByIdCommand(id);
+    commandProcessor.processCommand(command);
+    System.out.println(command.getResult());
   }
 
   private long getKeyboardNumber(String params, Scanner keyboard) {

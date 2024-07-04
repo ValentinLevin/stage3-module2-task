@@ -104,12 +104,16 @@ public class NewsServiceImpl implements NewsService {
             throw new AuthorNotFoundServiceException(updateRequest.getAuthorId());
         }
 
-        NewsEntity entity = newsMapper.toEntity(updateRequest);
-
-        entity.setLastUpdateDate(LocalDateTime.now());
+        NewsEntity changedEntity = newsMapper.toEntity(updateRequest);
 
         try {
-            entity = this.repository.update(entity);
+            NewsEntity currentNewsEntity =
+                    this.repository.readById(updateRequest.getId()).orElseThrow(() -> new NewsNotFoundServiceException(updateRequest.getId()));
+
+            changedEntity.setCreateDate(currentNewsEntity.getCreateDate());
+            changedEntity.setLastUpdateDate(LocalDateTime.now());
+
+            changedEntity = this.repository.update(changedEntity);
         } catch (EntityNullReferenceException e) {
             throw new RequestNullReferenceException();
         } catch (KeyNullReferenceException e) {
@@ -118,7 +122,7 @@ public class NewsServiceImpl implements NewsService {
             throw new NewsNotFoundServiceException(updateRequest.getId());
         }
 
-        return readById(entity.getId());
+        return readById(changedEntity.getId());
     }
 
     @Override
